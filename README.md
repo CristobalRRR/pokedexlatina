@@ -1,1 +1,4 @@
 # pokedexlatina
+La idea detrás de este proyecto es crear una app fácil de usar con información actualizada de una Pokédex, enfocada exclusivamente en la primera generación de Pokémon y orientada a jugadores de habla hispana, la app permitirá a los usuarios realizar un seguimiento de su progreso en la captura de Pokémon y ayudar en sus estrategias de batalla mediante la consulta de estadísticas y movimientos.
+
+El objetivo es ser una herramienta de apoyo a los jugadores hispanohablantes de los videojuegos Pokémon. Este prototipo estará enfocado en la primera generación, conteniendo información relevante sobre los primeros 151 Pokémon creados en los inicios de la franquicia. Su propósito principal es ofrecer una plataforma en español que permita a los usuarios gestionar su colección de Pokemon, además de consultar datos como sus estadísticas, movimientos y simular la ubicación de estos si existieran en la realidad.
