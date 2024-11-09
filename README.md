@@ -8,6 +8,8 @@
 
 ## Wireframes
 - Desplegable
+
+  
 ![Desplegable](https://github.com/AlfredoBE/Wireframes/blob/main/wireframeImages/drawerNavigatorScreen.png)
 
 
@@ -15,6 +17,8 @@ Lista lateral desplegable, a través de la cual se podrá navegar entre las dist
 
 
 - Listado Pokémon
+
+  
 ![Listado Pokémon](https://github.com/AlfredoBE/Wireframes/blob/main/wireframeImages/homeScreen.png)
 
 
@@ -22,6 +26,8 @@ Lista Pokémon, esta incluye todos los Pokémon con su número, tipo y nombre co
 
 
 - Detalles Pokémon
+
+  
 ![Detalles Pokémon](https://github.com/AlfredoBE/Wireframes/blob/main/wireframeImages/pokDetailsScreen.png)
 
 
@@ -29,6 +35,8 @@ Detalles Pokémon, en esta se muestran los detalles y características del Poké
 
 
 - Favoritos
+
+  
 ![Favoritos](https://github.com/AlfredoBE/Wireframes/blob/main/wireframeImages/favoritesListScreen.png)
 
 
@@ -36,6 +44,8 @@ Pantalla de favoritos, en esta se mostraran al igual que en la lista Pokémon un
 
 
 - Capturados
+
+  
 ![Capturados](https://github.com/AlfredoBE/Wireframes/blob/main/wireframeImages/captureListScreen.png)
 
 
@@ -43,6 +53,8 @@ Pantalla donde estarán los Pokémon marcados como capturados, estos son añadid
 
 
 - Movimientos
+
+  
 ![Movimientos](https://github.com/AlfredoBE/Wireframes/blob/main/wireframeImages/movementScreen.png)
 
 
@@ -50,6 +62,8 @@ Movimientos Pokémon, en esta se muestra un listado de todos los movimientos Pok
 
 
 - Detalles Movimiento
+
+  
 ![Detalles Movimiento](https://github.com/AlfredoBE/Wireframes/blob/main/wireframeImages/movDetailScreen.png)
 
 
