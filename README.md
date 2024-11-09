@@ -70,5 +70,16 @@ Movimientos Pokémon, en esta se muestra un listado de todos los movimientos Pok
 Detalles de un movimiento Pokémon con sus estadísticas relevantes, se puede acceder a este desde la pantalla Movimientos presionando el movimiento del que se desea conocer sus características. Estas son: Tipo, clase, potencia, precisión, PP (número de usos) mínimo y máximo y el efecto de este.
 
 
+- Ubicaciones Pokémon
+
+
+![Ubicaciones Pokémon](https://github.com/AlfredoBE/Wireframes/blob/main/wireframeImages/mapScreen.png)
+
+
+Ubicaciones Pokémon, en ella se mostrarán las ubicaciones simuladas en las que pueden habitar según información del videojuego, además posee presionables para mostrar la posición del usuario y otra para generar las ubicaciones de los Pokémon.
+
+
+
+
 
 
