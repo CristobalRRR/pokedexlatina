@@ -1,11 +1,3 @@
-/*// src/data/pokemonData.js
-export default [
-  { id: 1, name: 'Bulbasaur', type: 'Planta', captured: false, favorite: true },
-  // Agrega más datos
-];
-*/
-
-// src/data/PokemonData.js
 import axios from 'axios';
 
 // URL base de PokeAPI

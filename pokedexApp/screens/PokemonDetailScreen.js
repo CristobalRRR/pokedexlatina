@@ -7,9 +7,10 @@ export default function PokemonDetailScreen({ route }) {
 
   return (
     <View style={{ padding: 20 }}>
-      <Text>Nombre: {pokemon.name}</Text>
+      <Text>Nombre: {pokemon.name.charAt(0).toUpperCase()+pokemon.name.slice(1)}</Text>
+      {/*Se usa charAt(0).toUpperCase para hacer la primera mayuscula y slice para unir desde el segundo caracter*/}
       <Text>Tipo: {pokemon.types}</Text>
-      <Text>Estadísticas:</Text>
+      <Text>Estadísticas: {pokemon.stats.base_stats}</Text>
       {/* Faltan detalles */}
     </View>
   );

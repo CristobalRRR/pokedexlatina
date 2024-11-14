@@ -1,6 +1,7 @@
 import axios from "axios";
+import {URL_FIREBASE} from '@env';
 
-const URL = "";// http de firebase bd
+const URL = URL_FIREBASE;// http de firebase bd
 
 /* export function saveFav(fav, uuid) {
     axios.post(`${URL}/favorites/${uuid}.json`, fav);
@@ -32,73 +33,3 @@ export async function getFavs(uuid) {
     }
  */
 
-    
-async function markAsCaptured(userId, pokemonId) {
-  try {
-    await axios.put(
-      `${URL}/users/${userId}/capturedPokemons/${pokemonId}.json`,
-      true
-    );
-    console.log(`Pokémon ${pokemonId} marcado como capturado.`);
-  } catch (error) {
-    console.error("Error marcando como capturado:", error);
-  }
-}
-
-async function isPokemonCaptured(userId, pokemonId) {
-  try {
-    const response = await axios.get(
-      `${URL}/users/${userId}/capturedPokemons/${pokemonId}.json`
-    );
-    return response.data === true;
-  } catch (error) {
-    console.error("Error verificando captura:", error);
-    return false;
-  }
-}
-
-async function unmarkAsCaptured(userId, pokemonId) {
-  try {
-    await axios.delete(
-      `${URL}/users/${userId}/capturedPokemons/${pokemonId}.json`
-    );
-    console.log(`Pokémon ${pokemonId} eliminado de capturados.`);
-  } catch (error) {
-    console.error("Error eliminando de capturados:", error);
-  }
-}
-
-async function markAsFavorite(userId, pokemonId) {
-  try {
-    await axios.put(
-      `${URL}/users/${userId}/favoritePokemons/${pokemonId}.json`,
-      true
-    );
-    console.log(`Pokémon ${pokemonId} marcado como favorito.`);
-  } catch (error) {
-    console.error("Error marcando como favorito:", error);
-  }
-}
-
-async function isPokemonFavorite(userId, pokemonId) {
-  try {
-    const response = await axios.get(
-      `${URL}/users/${userId}/favoritePokemons/${pokemonId}.json`
-    );
-    return response.data === true;
-  } catch (error) {
-    console.error("Error verificando favorito:", error);
-    return false;
-  }
-}
-
-async function unmarkAsFavorite(userId, pokemonId) {
-  try {
-    await axios.delete(
-      `${URL}/users/${userId}/favoritePokemons/${pokemonId}.json`
-    );
-    console.log(`Pokémon ${pokemonId} eliminado de favoritos.`);
-  } catch (error) {
-    console.error("Error eliminando de favoritos:", error);
-  }
-}
