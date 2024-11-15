@@ -1,5 +1,15 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import {
+  FlatList,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ActivityIndicator,
+  } from "react-native";
+import { fetchMoveData } from "../data/MoveData";
 //import MapView, { Marker } from 'react-native-maps';
 
 export default function MapScreen() {

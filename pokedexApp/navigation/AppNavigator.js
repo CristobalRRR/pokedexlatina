@@ -6,7 +6,7 @@ import CapturedScreen from "../screens/CapturedScreen";
 import FavoritesScreen from "../screens/FavoriteScreen";
 import MovesScreen from "../screens/MovesScreen";
 import PokemonDetailScreen from "../screens/PokemonDetailScreen";
-import MapScreen from '../screens/MapScreen';
+import MapScreen from "../screens/MapScreen";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();

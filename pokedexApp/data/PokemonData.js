@@ -1,13 +1,14 @@
 import axios from 'axios';
+import {URL_POKEAPI} from '@env';
 
 // URL base de PokeAPI
-const POKE_API_URL = 'https://pokeapi.co/api/v2';
+const API = URL_POKEAPI;
 
 // Función para obtener datos de los primeros 151 Pokémon
 export async function fetchPokemonData(limit = 151) {
   try {
     // Solicita una lista de Pokémon con los detalles mínimos (nombre y URL)
-    const response = await axios.get(`${POKE_API_URL}/pokemon?limit=${limit}`);
+    const response = await axios.get(`${API}/pokemon?limit=${limit}`);
     const pokemonList = response.data.results;
 
     // Itera sobre cada Pokémon y obtiene sus detalles completos
@@ -19,8 +20,8 @@ export async function fetchPokemonData(limit = 151) {
           name: pokemonDetails.data.name,
           image: pokemonDetails.data.sprites.front_default, // Imagen del Pokémon
           types: pokemonDetails.data.types.map((type) => type.type.name), // Tipos del Pokémon
-          captured: false,// no viene en la api
-          favorite: false,
+          /* captured: false,// no viene en la api
+          favorites: false,// no viene en la api */
           stats: pokemonDetails.data.stats.map((stat) => ({
             name: stat.stat.name,
             base_stat: stat.base_stat,
