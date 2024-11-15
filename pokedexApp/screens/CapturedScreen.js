@@ -9,34 +9,64 @@ import {
   Image,
   ActivityIndicator,
   } from "react-native";
-import { fetchMoveData } from "../data/MoveData";
+import styles from '../styles/HomeStyles';
 import { fetchPokemonData } from '../data/PokemonData';
+import { fetchCaptured } from '../data/CapturedData';
 import { URL_FIREBASE } from "@env";
+import TypeIcon from "../components/TypeIcon";
+
+const URL = URL_FIREBASE;
 
 export default function CapturedScreen() {
-  const capturedPokemons = PokemonData.filter(pokemon => pokemon.captured);
+  const [capturedPokemon, setCapturedPokemon] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const fetchFavorites = async () => {
-    try {
-      const response = await axios.get(`${URL}/favorites.json`);
-      const favoritesData = response.data;
-      console.log("Datos de favoritos:", favoritesData);
-      return favoritesData;
-    } catch (error) {
-      console.error("Error al obtener los favoritos:", error);
-      return null;
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const CapturedData = await fetchCaptured();
+        const data = await fetchPokemonData();
+        const filteredCaptured = data.filter(
+          (pokemon) => !!favoritesData?.[pokemon.id]?.favorite
+        );
+
+        setCapturedPokemon(filteredCaptured);
+      } catch (error) {
+        Alert.alert("Error", "No se pudieron cargar los datos de Pokémon");
+      } finally {
+        setLoading(false);
+      }
     }
-  };
+
+    loadData();
+  }, []);
 
   return (
-    <FlatList
-      data={capturedPokemons}
-      keyExtractor={(item) => item.id.toString()}
-      renderItem={({ item }) => (
-        <View style={{ padding: 20, borderBottomWidth: 1 }}>
-          <Text>{item.name}</Text>
-        </View>
-      )}
-    />
+    <View style={styles.container}>
+      <FlatList
+        data={capturedPokemon} // Usar la lista filtrada
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.pokemonItem}>
+            <Text style={styles.pokemonid}>#{item.id}</Text>
+            <Image source={{ uri: item.image }} style={styles.pokemonImage} />
+            <View style={styles.pokemonDetails}>
+              <Text style={styles.pokemonName}>
+                {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
+              </Text>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  {item.types.map((type) => (
+                    <TypeIcon key={type} type={type} />
+                  ))}
+                </View>
+              <TouchableOpacity>
+                <Text style={styles.favoriteTrue}>★</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
   );
 }

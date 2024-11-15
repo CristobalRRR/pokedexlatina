@@ -28,7 +28,9 @@ export async function fetchMoveData(limit = 255) {
           power: moveDetails.data.power,
           accuracy: moveDetails.data.accuracy,
           pp: moveDetails.data.pp,
-          
+          spanish_text: moveDetails.data.flavor_text_entries.find(
+            (entry)=> entry.language.name === "es"
+          ).flavor_text,
         };
       })
     );
