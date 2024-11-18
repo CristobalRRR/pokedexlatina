@@ -20,12 +20,11 @@ export async function fetchPokemonData(limit = 151) {
           name: pokemonDetails.data.name,
           image: pokemonDetails.data.sprites.front_default, // Imagen del Pokémon
           types: pokemonDetails.data.types.map((type) => type.type.name), // Tipos del Pokémon
-          /* captured: false,// no viene en la api
-          favorites: false,// no viene en la api */
           stats: pokemonDetails.data.stats.map((stat) => ({
             name: stat.stat.name,
             base_stat: stat.base_stat,
-          })), // Estadísticas del Pokémon
+          })),
+          ability_spanish: pokemonDetails.data.abilities.name,
         };
       })
     );

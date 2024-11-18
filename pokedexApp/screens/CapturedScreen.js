@@ -24,15 +24,18 @@ export default function CapturedScreen() {
   useEffect(() => {
     async function loadData() {
       try {
-        const CapturedData = await fetchCaptured();
+        const capturedData = await fetchCaptured();
         const data = await fetchPokemonData();
         const filteredCaptured = data.filter(
-          (pokemon) => !!favoritesData?.[pokemon.id]?.favorite
+          (pokemon) => !!capturedData?.[pokemon.id]?.captured
         );
-
-        setCapturedPokemon(filteredCaptured);
+        const updatedData = filteredCaptured.map((pokemon) => ({
+          ...pokemon,
+          captured: !!capturedData?.[pokemon.id]?.captured,
+        }));
+        setCapturedPokemon(updatedData);
       } catch (error) {
-        Alert.alert("Error", "No se pudieron cargar los datos de Pokémon");
+        console.error("Error", "No se pudieron cargar los datos de Pokémon");
       } finally {
         setLoading(false);
       }
@@ -40,6 +43,23 @@ export default function CapturedScreen() {
 
     loadData();
   }, []);
+
+  const toggleCaptured = async (pokemonId, isCaptured) => {
+    try {
+      await axios.patch(`${URL}/captured/${pokemonId}.json`, {
+        captured: isCaptured,
+      });
+      setCapturedPokemon((prevData) =>
+        prevData.map((pokemon) =>
+          pokemon.id === pokemonId
+            ? { ...pokemon, captured: isCaptured }
+            : pokemon
+        )
+      );
+    } catch (error) {
+      console.error("Error al actualizar los capturados:", error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -59,9 +79,15 @@ export default function CapturedScreen() {
                     <TypeIcon key={type} type={type} />
                   ))}
                 </View>
-              <TouchableOpacity>
-                <Text style={styles.favoriteTrue}>★</Text>
-              </TouchableOpacity>
+              <TouchableOpacity
+                  onPress={() => toggleCaptured(item.id, !item.captured)}
+                >
+                  <Text
+                    style={ item.captured ? styles.capturedTrue : styles.capturedFalse}
+                  >
+                    {item.captured ? "✅" : "⬜"}
+                  </Text>
+                </TouchableOpacity>
             </View>
           </View>
         )}

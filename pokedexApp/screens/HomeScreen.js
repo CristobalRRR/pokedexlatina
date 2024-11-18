@@ -12,6 +12,7 @@ import {
 import styles from "../styles/HomeStyles";
 import { fetchPokemonData } from "../data/PokemonData";
 import { fetchFavorites } from "../data/FavoriteData";
+import { fetchCaptured} from "../data/CapturedData";
 import { URL_FIREBASE } from "@env";
 import TypeIcon from "../components/TypeIcon";
 
@@ -25,10 +26,12 @@ export default function HomeScreen({ navigation }) {
     async function loadData() {
       try {
         const favoritesData = await fetchFavorites();
+        const capturedData = await fetchCaptured();
         const data = await fetchPokemonData();
         const updatedData = data.map((pokemon) => ({
           ...pokemon,
           favorite: !!favoritesData?.[pokemon.id]?.favorite,
+          captured: !!capturedData?.[pokemon.id]?.captured,
         }));
 
         setPokemonData(updatedData);
@@ -51,6 +54,23 @@ export default function HomeScreen({ navigation }) {
         prevData.map((pokemon) =>
           pokemon.id === pokemonId
             ? { ...pokemon, favorite: isFavorite }
+            : pokemon
+        )
+      );
+    } catch (error) {
+      console.error("Error al actualizar el favorito:", error);
+    }
+  };
+
+  const toggleCaptured = async (pokemonId, isCaptured) => {
+    try {
+      await axios.patch(`${URL}/captured/${pokemonId}.json`, {
+        captured: isCaptured,
+      });
+      setPokemonData((prevData) =>
+        prevData.map((pokemon) =>
+          pokemon.id === pokemonId
+            ? { ...pokemon, captured: isCaptured }
             : pokemon
         )
       );
@@ -94,6 +114,15 @@ export default function HomeScreen({ navigation }) {
                     style={ item.favorite ? styles.favoriteTrue : styles.favoriteFalse}
                   >
                     {item.favorite ? "★" : "☆"}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => toggleCaptured(item.id, !item.captured)}
+                >
+                  <Text
+                    style={ item.captured ? styles.capturedTrue : styles.capturedFalse}
+                  >
+                    {item.captured ? "✅" : "⬜" }
                   </Text>
                 </TouchableOpacity>
               </View>

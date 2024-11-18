@@ -15,8 +15,8 @@ export default function MovesDetailsScreen({ route }) {
       <Text style={styles.textStyle}>
         Clase: <ClassIcon damage_class={move.damage_class} />
       </Text>
-      <Text style={styles.textStyle}>Potencia: {move.power}</Text>
-      <Text style={styles.textStyle}>Precision: {move.accuracy}%</Text>
+      <Text style={styles.textStyle}>Potencia: {move.damage_class === "status" ? "No aplica": move.power}</Text>
+      <Text style={styles.textStyle}>Precision: {move.damage_class === "status" ? "No aplica": move.accuracy + "%"}</Text>
       <Text style={styles.textStyle}>PP: {move.pp}</Text>
       <Text style={styles.textStyle}>Efecto: {move.spanish_text}</Text>
     </View>

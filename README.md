@@ -2,6 +2,8 @@
 
 ## Descripcion
 - La idea detrás de este proyecto es crear una app fácil de usar con información actualizada de una Pokédex, enfocada exclusivamente en la primera generación de Pokémon y orientada a jugadores de habla hispana, la app permitirá a los usuarios realizar un seguimiento de su progreso en la captura de Pokémon y ayudar en sus estrategias de batalla mediante la consulta de estadísticas y movimientos.
+- Se utilizará la base de datos google firebase, por ser una herramienta de facil implementacion, además
+de ser rápida y adecuada para prototipos de apliaciones u otros proyectos informaticos.
 
 ## Objetivo
 - El objetivo es ser una herramienta de apoyo a los jugadores hispanohablantes de los videojuegos Pokémon. Este prototipo estará enfocado en la primera generación, conteniendo información relevante sobre los primeros 151 Pokémon creados en los inicios de la franquicia. Su propósito principal es ofrecer una plataforma en español que permita a los usuarios gestionar su colección de Pokemon, además de consultar datos como sus estadísticas, movimientos y simular la ubicación de estos si existieran en la realidad.
@@ -78,8 +80,11 @@ Detalles de un movimiento Pokémon con sus estadísticas relevantes, se puede ac
 
 Ubicaciones Pokémon, en ella se mostrarán las ubicaciones simuladas en las que pueden habitar según información del videojuego, además posee presionables para mostrar la posición del usuario y otra para generar las ubicaciones de los Pokémon.
 
+- Inicio de sesión
 
 
+![Ubicaciones Pokémon](https://github.com/AlfredoBE/Wireframes/blob/main/wireframeImages/loginScreen.png)
 
 
+Inicio de sesión con credenciales de acceso, esto permitira acceder a las funciones de favoritos y capturados de la aplicación.
 
