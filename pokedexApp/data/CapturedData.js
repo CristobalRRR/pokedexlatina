@@ -9,7 +9,6 @@ export const fetchCaptured = async () => {
     try {
       const response = await axios.get(`${URL}/captured.json`);
       const capturedData = response.data;
-      console.log("Datos de capturados:", capturedData);
       return capturedData;
     } catch (error) {
       console.error("Error al obtener los capturados:", error);

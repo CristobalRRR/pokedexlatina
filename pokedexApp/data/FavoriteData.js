@@ -9,7 +9,6 @@ export const fetchFavorites = async () => {
     try {
       const response = await axios.get(`${URL}/favorites.json`);
       const favoritesData = response.data;
-      console.log("Datos de favoritos:", favoritesData);
       return favoritesData;
     } catch (error) {
       console.error("Error al obtener los favoritos:", error);

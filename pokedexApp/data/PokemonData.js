@@ -5,7 +5,7 @@ import {URL_POKEAPI} from '@env';
 const API = URL_POKEAPI;
 
 // Función para obtener datos de los primeros 151 Pokémon
-export async function fetchPokemonData(limit = 151) {
+export async function fetchPokemonData(limit=151) {
   try {
     // Solicita una lista de Pokémon con los detalles mínimos (nombre y URL)
     const response = await axios.get(`${API}/pokemon?limit=${limit}`);
@@ -24,11 +24,10 @@ export async function fetchPokemonData(limit = 151) {
             name: stat.stat.name,
             base_stat: stat.base_stat,
           })),
-          ability_spanish: pokemonDetails.data.abilities.name,
+          ability_spanish: pokemonDetails.data.name,
         };
       })
     );
-
     return pokemonData;
   } catch (error) {
     console.error('Error fetching Pokémon data:', error);

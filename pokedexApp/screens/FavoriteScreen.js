@@ -8,41 +8,47 @@ import {
   TouchableOpacity,
   Image,
   ActivityIndicator,
-  } from "react-native";
-import styles from '../styles/HomeStyles';
-import { fetchPokemonData } from '../data/PokemonData';
+} from "react-native";
+
+import styles from "../styles/HomeStyles";
+import { fetchPokemonData } from "../data/PokemonData";
 import { fetchFavorites } from "../data/FavoriteData";
 import { URL_FIREBASE } from "@env";
 import TypeIcon from "../components/TypeIcon";
+import { useIsFocused } from "@react-navigation/native";
 
 const URL = URL_FIREBASE;
 
 export default function FavoriteScreen() {
   const [favoritePokemon, setFavoritePokemon] = useState([]);
   const [loading, setLoading] = useState(true);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    async function loadData() {
-      try {
-        const favoritesData = await fetchFavorites();
-        const data = await fetchPokemonData();
-        const filteredFavorites = data.filter(
-          (pokemon) => !!favoritesData?.[pokemon.id]?.favorite
-        );
-        const updatedData = filteredFavorites.map((pokemon) => ({
-          ...pokemon,
-          favorite: !!favoritesData?.[pokemon.id]?.favorite,
-        }));
-        setFavoritePokemon(updatedData);
-      } catch (error) {
-        Alert.alert("Error", "No se pudieron cargar los datos de Pokémon");
-      } finally {
-        setLoading(false);
-      }
+    if (isFocused) {
+      loadData();
     }
+  }, [isFocused]);
 
-    loadData();
-  }, []);
+  const loadData = async () => {
+    setLoading(true);
+    try {
+      const favoritesData = await fetchFavorites();
+      const data = await fetchPokemonData();
+      const filteredFavorites = data.filter(
+        (pokemon) => !!favoritesData?.[pokemon.id]?.favorite
+      );
+      const updatedData = filteredFavorites.map((pokemon) => ({
+        ...pokemon,
+        favorite: !!favoritesData?.[pokemon.id]?.favorite,
+      }));
+      setFavoritePokemon(updatedData);
+    } catch (error) {
+      Alert.alert("Error", "No se pudieron cargar los datos de Pokémon");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const toggleFavorite = async (pokemonId, isFavorite) => {
     try {
@@ -75,19 +81,21 @@ export default function FavoriteScreen() {
                 {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
               </Text>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  {item.types.map((type) => (
-                    <TypeIcon key={type} type={type} />
-                  ))}
-                </View>
+                {item.types.map((type) => (
+                  <TypeIcon key={type} type={type} />
+                ))}
+              </View>
               <TouchableOpacity
-                  onPress={() => toggleFavorite(item.id, !item.favorite)}
+                onPress={() => toggleFavorite(item.id, !item.favorite)}
+              >
+                <Text
+                  style={
+                    item.favorite ? styles.favoriteTrue : styles.favoriteFalse
+                  }
                 >
-                  <Text
-                    style={ item.favorite ? styles.favoriteTrue : styles.favoriteFalse}
-                  >
-                    {item.favorite ? "★" : "☆"}
-                  </Text>
-                </TouchableOpacity>
+                  {item.favorite ? "★" : "☆"}
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
         )}

@@ -42,7 +42,36 @@ const styles = StyleSheet.create({
       textShadowColor: "black",
       textShadowOffset: { width: 1, height: 1 },
       textShadowRadius: 2,
-    }
+    },
+    pokemonDetailsImage:{
+      width: 200,
+      height: 200,
+      alignSelf: "left",
+      marginBottom: 5 
+    },
+    pokemonDetailsHeaderText:{
+      flex: 1,
+      fontSize: 25,
+      fontWeight: "bold",
+    },
+    pokemonDetailsText:{
+      fontSize: 25,
+      fontWeight: "bold",
+      padding: 5
+    },
+    pokemonDetailsId:{
+      marginBottom: 5,
+      fontSize: 25,
+      fontWeight: "bold",
+    },
+    pokemonDetailsName:{
+      fontSize: 25,
+      fontWeight: "bold",
+    },
+    pokemonDetailsHeader:{
+      flexDirection: "row",
+      alignItems: "center"
+      }
   });
 
   export default styles;

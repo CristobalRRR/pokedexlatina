@@ -36,7 +36,7 @@ export default function AppNavigator() {
       <Drawer.Screen name="Capturados" component={CapturedScreen} />
       <Drawer.Screen name="Favoritos" component={FavoritesScreen} />
       <Drawer.Screen name="Movimientos" component={MoveStack} />
-      <Drawer.Screen name="Mapa" component={MapScreen} />
+      <Drawer.Screen name="Mapa" component={MapScreen}/>
     </Drawer.Navigator>
   );
 }

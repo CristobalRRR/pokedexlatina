@@ -5,7 +5,7 @@ import { Accuracy } from "expo-location";
 // URL base de PokeAPI
 const API = URL_POKEAPI;
 
-export async function fetchMoveData(limit = 255) {
+export async function fetchMoveData(limit = 200) {
   try {
     // Llamada a la API
     const response = await axios.get(`${API}/move?limit=${limit}`);

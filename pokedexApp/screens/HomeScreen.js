@@ -12,38 +12,42 @@ import {
 import styles from "../styles/HomeStyles";
 import { fetchPokemonData } from "../data/PokemonData";
 import { fetchFavorites } from "../data/FavoriteData";
-import { fetchCaptured} from "../data/CapturedData";
+import { fetchCaptured } from "../data/CapturedData";
 import { URL_FIREBASE } from "@env";
 import TypeIcon from "../components/TypeIcon";
+import { useIsFocused } from "@react-navigation/native";
 
 const URL = URL_FIREBASE;
 
 export default function HomeScreen({ navigation }) {
   const [pokemonData, setPokemonData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    async function loadData() {
-      try {
-        const favoritesData = await fetchFavorites();
-        const capturedData = await fetchCaptured();
-        const data = await fetchPokemonData();
-        const updatedData = data.map((pokemon) => ({
-          ...pokemon,
-          favorite: !!favoritesData?.[pokemon.id]?.favorite,
-          captured: !!capturedData?.[pokemon.id]?.captured,
-        }));
-
-        setPokemonData(updatedData);
-      } catch (error) {
-        Alert.alert("Error", "No se pudieron cargar los datos de Pokémon");
-      } finally {
-        setLoading(false);
-      }
+    if (isFocused) {
+      loadData();
     }
+  }, [isFocused]);
 
-    loadData();
-  }, []);
+  const loadData = async () => {
+    setLoading(true);
+    try {
+      const favoritesData = await fetchFavorites();
+      const capturedData = await fetchCaptured();
+      const data = await fetchPokemonData();
+      const updatedData = data.map((pokemon) => ({
+        ...pokemon,
+        favorite: !!favoritesData?.[pokemon.id]?.favorite,
+        captured: !!capturedData?.[pokemon.id]?.captured,
+      }));
+      setPokemonData(updatedData);
+    } catch (error) {
+      Alert.alert("Error", "No se pudieron cargar los datos de Pokémon");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const toggleFavorite = async (pokemonId, isFavorite) => {
     try {
@@ -111,7 +115,9 @@ export default function HomeScreen({ navigation }) {
                   onPress={() => toggleFavorite(item.id, !item.favorite)}
                 >
                   <Text
-                    style={ item.favorite ? styles.favoriteTrue : styles.favoriteFalse}
+                    style={
+                      item.favorite ? styles.favoriteTrue : styles.favoriteFalse
+                    }
                   >
                     {item.favorite ? "★" : "☆"}
                   </Text>
@@ -120,9 +126,11 @@ export default function HomeScreen({ navigation }) {
                   onPress={() => toggleCaptured(item.id, !item.captured)}
                 >
                   <Text
-                    style={ item.captured ? styles.capturedTrue : styles.capturedFalse}
+                    style={
+                      item.captured ? styles.capturedTrue : styles.capturedFalse
+                    }
                   >
-                    {item.captured ? "✅" : "⬜" }
+                    {item.captured ? "✅" : "⬜"}
                   </Text>
                 </TouchableOpacity>
               </View>

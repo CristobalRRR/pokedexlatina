@@ -14,35 +14,40 @@ import { fetchPokemonData } from '../data/PokemonData';
 import { fetchCaptured } from '../data/CapturedData';
 import { URL_FIREBASE } from "@env";
 import TypeIcon from "../components/TypeIcon";
+import { useIsFocused } from "@react-navigation/native";
 
 const URL = URL_FIREBASE;
 
 export default function CapturedScreen() {
   const [capturedPokemon, setCapturedPokemon] = useState([]);
   const [loading, setLoading] = useState(true);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    async function loadData() {
-      try {
-        const capturedData = await fetchCaptured();
-        const data = await fetchPokemonData();
-        const filteredCaptured = data.filter(
-          (pokemon) => !!capturedData?.[pokemon.id]?.captured
-        );
-        const updatedData = filteredCaptured.map((pokemon) => ({
-          ...pokemon,
-          captured: !!capturedData?.[pokemon.id]?.captured,
-        }));
-        setCapturedPokemon(updatedData);
-      } catch (error) {
-        console.error("Error", "No se pudieron cargar los datos de Pokémon");
-      } finally {
-        setLoading(false);
-      }
+    if (isFocused) {
+      loadData();
     }
+  }, [isFocused]);
 
-    loadData();
-  }, []);
+  const loadData = async () => {
+    setLoading(true);
+    try {
+      const capturedData = await fetchCaptured();
+      const data = await fetchPokemonData();
+      const filteredCaptured = data.filter(
+        (pokemon) => !!capturedData?.[pokemon.id]?.captured
+      );
+      const updatedData = filteredCaptured.map((pokemon) => ({
+        ...pokemon,
+        captured: !!capturedData?.[pokemon.id]?.captured,
+      }));
+      setCapturedPokemon(updatedData);
+    } catch (error) {
+      console.error("Error", "No se pudieron cargar los datos de Pokémon");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const toggleCaptured = async (pokemonId, isCaptured) => {
     try {
