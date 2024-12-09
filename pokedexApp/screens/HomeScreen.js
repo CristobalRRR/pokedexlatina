@@ -23,6 +23,7 @@ export default function HomeScreen({ navigation }) {
   const [pokemonData, setPokemonData] = useState([]);
   const [loading, setLoading] = useState(true);
   const isFocused = useIsFocused();
+  const [description, setDescription]= useState([]);
 
   useEffect(() => {
     if (isFocused) {
@@ -36,6 +37,7 @@ export default function HomeScreen({ navigation }) {
       const favoritesData = await fetchFavorites();
       const capturedData = await fetchCaptured();
       const data = await fetchPokemonData();
+      //const descriptionData = await getPokemonDescription();
       const updatedData = data.map((pokemon) => ({
         ...pokemon,
         favorite: !!favoritesData?.[pokemon.id]?.favorite,
@@ -91,6 +93,7 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <FlatList
         data={pokemonData}
+        dataDescription={description}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity

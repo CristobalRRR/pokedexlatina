@@ -2,6 +2,7 @@ import React from "react";
 import { View, Image, Text } from "react-native";
 import TypeIconDetails from "../components/TypeIconDetails";
 import styles from "../styles/HomeStyles";
+
 export default function PokemonDetailScreen({ route }) {
   const { pokemon } = route.params;
 
@@ -24,8 +25,8 @@ export default function PokemonDetailScreen({ route }) {
         ))}
       </View>
       <Text style={styles.pokemonDetailsText}>Habilidad: {pokemon.ability_spanish}</Text>
-      <Text style={styles.pokemonDetailsText}>Especie: </Text>
-      <Text style={styles.pokemonDetailsText}>Estadísticas: {pokemon.stats.name}</Text>
-    </View>
+      <Text style={styles.pokemonDetailsText}>Especie: {pokemon.flavor_text}</Text>
+      <Text style={styles.pokemonDetailsText}>Estadísticas: {pokemon.stats.map((stat)=>(" " + stat + ": " + pokemon.stat_value))}</Text>
+      </View>
   );
 }

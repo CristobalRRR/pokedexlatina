@@ -1,6 +1,6 @@
 import axios from "axios";
 import { URL_POKEAPI } from "@env";
-import { Accuracy } from "expo-location";
+
 
 // URL base de PokeAPI
 const API = URL_POKEAPI;
