@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, ScrollView } from "react-native";
 import TypeIconDetails from "../components/TypeIconDetails";
 import styles from "../styles/HomeStyles";
 
@@ -7,7 +7,7 @@ export default function PokemonDetailScreen({ route }) {
   const { pokemon } = route.params;
 
   return (
-    <View style={{ padding: 5}}>
+    <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 10 }}>
       <View style = {styles.pokemonDetailsHeader}>
       <Image source={{ uri: pokemon.image}} style={styles.pokemonDetailsImage}/>
       <View style={styles.pokemonDetailsHeaderText}>
@@ -24,9 +24,17 @@ export default function PokemonDetailScreen({ route }) {
           <TypeIconDetails key={type} type={type} />
         ))}
       </View>
-      <Text style={styles.pokemonDetailsText}>Habilidad: {pokemon.ability_spanish}</Text>
+      <Text style={styles.pokemonDetailsText}>Habilidad: {pokemon.normal_ability}</Text>
+      <Text style={styles.pokemonDetailsText}>Habilidad oculta: {pokemon.hidden_ability}</Text>
       <Text style={styles.pokemonDetailsText}>Especie: {pokemon.flavor_text}</Text>
-      <Text style={styles.pokemonDetailsText}>Estadísticas: {pokemon.stats.map((stat)=>(" " + stat + ": " + pokemon.stat_value))}</Text>
+      <Text style={styles.pokemonDetailsText}>Estadísticas:</Text>
+      <View>
+        {pokemon.stats.map((stat, index) => (
+          <Text key={index} style={styles.pokemonDetailsText}>
+            {stat.label}: {stat.value}
+          </Text>
+        ))}
       </View>
+      </ScrollView>
   );
 }
